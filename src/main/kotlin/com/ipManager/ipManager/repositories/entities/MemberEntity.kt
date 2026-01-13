@@ -11,8 +11,9 @@ import jakarta.persistence.Table
 data class MemberEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long ?= null,
     val firstName: String,
     val lastName: String,
+    val email: String,
     val password: String,
 )

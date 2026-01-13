@@ -1,0 +1,7 @@
+CREATE TABLE MEMBERS(
+    column id INT PRIMARY KEY,
+    column first_name VARCHAR(255) NOT NULL,
+    column last_name VARCHAR(255) NOT NULL,
+    column email VARCHAR(255) NOT NULL,
+    column password VARCHAR(255) NOT NULL,
+);
