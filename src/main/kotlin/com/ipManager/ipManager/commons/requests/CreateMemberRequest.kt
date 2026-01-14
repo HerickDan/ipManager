@@ -7,7 +7,7 @@ data class CreateMemberRequest(
     val lastName: String,
     val password: String,
     val email: String,
-
+    val description: String ? = "Default description"
     ) {
     fun toDto(): MemberDto =
         MemberDto(
