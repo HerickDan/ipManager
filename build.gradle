@@ -33,7 +33,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webservices'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'tools.jackson.module:jackson-module-kotlin'
-	implementation'org.flywaydb:flyway-core:11.16.0'
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	implementation "org.springframework.security:spring-security-config"
+	implementation 'org.flywaydb:flyway-core:10.4.1'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'// ou a mais recente
 
