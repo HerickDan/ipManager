@@ -5,4 +5,4 @@ data class MemberDto(
     val lastName: String,
     val password: String,
     val email: String,
-    )
+)
