@@ -21,7 +21,6 @@ class MemberService(
             password = encodedPassword.toString(),
             email = memberDto.email
         )
-
         memberRepository.save(memberEntity)
     }
 }
