@@ -50,16 +50,11 @@ class SecurityConfig(
     }
 
     @Bean
-    fun userDetailsService(): UserDetailsService {
-        val user = User.builder().username("name").password("password").build()
-        return InMemoryUserDetailsManager(user)
-    }
-
-    @Bean
     fun authManager(http: HttpSecurity): AuthenticationManager {
         val builder = http.getSharedObject(AuthenticationManagerBuilder::class.java)
         builder.userDetailsService(customerUserDetails)
             .passwordEncoder(passwordEncoder())
         return builder.build()
     }
+
 }

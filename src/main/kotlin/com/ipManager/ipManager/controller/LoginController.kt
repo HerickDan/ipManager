@@ -20,10 +20,4 @@ class LoginController(
     ): LoginResponseDto {
         return service.login(login)
     }
-
-    @GetMapping("/hello")
-    fun hello(): String{
-        return "HELLO MOTHERFUCER"
-    }
-
 }
