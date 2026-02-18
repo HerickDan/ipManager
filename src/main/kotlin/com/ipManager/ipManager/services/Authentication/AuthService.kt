@@ -20,8 +20,6 @@ class AuthService(
             )
         )
 
-        println("user=${auth.name}")
-        println("roles=${auth.authorities.map { it.authority }}")
         SecurityContextHolder.getContext().authentication = auth
         return LoginResponseDto(
             auth.name,
