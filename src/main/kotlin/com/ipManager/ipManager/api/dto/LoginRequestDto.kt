@@ -1,4 +1,4 @@
-package com.ipManager.ipManager.commons.dto
+package com.ipManager.ipManager.api.dto
 
 data class LoginRequestDto (
     val email: String,

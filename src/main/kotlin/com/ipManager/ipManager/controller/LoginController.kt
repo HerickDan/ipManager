@@ -1,9 +1,8 @@
 package com.ipManager.ipManager.controller
 
-import com.ipManager.ipManager.commons.dto.LoginRequestDto
-import com.ipManager.ipManager.commons.responses.LoginResponseDto
+import com.ipManager.ipManager.api.dto.LoginRequestDto
+import com.ipManager.ipManager.api.responses.LoginResponseDto
 import com.ipManager.ipManager.services.Authentication.AuthService
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

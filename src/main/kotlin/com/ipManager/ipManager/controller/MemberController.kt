@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.controller
 
-import com.ipManager.ipManager.commons.requests.CreateMemberRequest
+import com.ipManager.ipManager.api.requests.CreateMemberRequest
 import com.ipManager.ipManager.services.MemberService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
