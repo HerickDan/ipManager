@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.api.requests
 
-import com.ipManager.ipManager.api.dto.MemberDto
+import com.ipManager.ipManager.api.dto.CreateMemberDto
 
 data class CreateMemberRequest(
     val firstName: String,
@@ -9,8 +9,8 @@ data class CreateMemberRequest(
     val email: String,
     val description: String ? = "Default description"
     ) {
-    fun toDto(): MemberDto =
-        MemberDto(
+    fun toDto(): CreateMemberDto =
+        CreateMemberDto(
             firstName = this.email,
             lastName = this.lastName,
             password = this.password,
