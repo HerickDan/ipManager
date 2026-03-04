@@ -29,7 +29,9 @@ class SecurityConfig(
                 it.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
             }
             .authorizeHttpRequests { auth ->
+                auth.requestMatchers("/member").permitAll()
                 auth.requestMatchers("/auth").permitAll()
+                auth.requestMatchers("/payment").authenticated()
                 auth.requestMatchers("/auth/hello").authenticated()
             }
             .securityContext {
