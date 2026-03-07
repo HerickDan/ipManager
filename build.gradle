@@ -36,7 +36,6 @@ dependencies {
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'tools.jackson.module:jackson-module-kotlin'
 	compileOnly 'org.projectlombok:lombok'
-	implementation 'com.github.mvallim:emv-qrcode:0.1.2'
 	runtimeOnly 'org.postgresql:postgresql:42.6.0'
 	implementation 'org.flywaydb:flyway-core:10.20.1'
 	implementation 'org.flywaydb:flyway-database-postgresql:10.20.1'
