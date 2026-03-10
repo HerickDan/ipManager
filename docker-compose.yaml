@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:16
+    image: postgres:15.4
     environment:
       POSTGRES_DB: ipmanager
       POSTGRES_USER: test

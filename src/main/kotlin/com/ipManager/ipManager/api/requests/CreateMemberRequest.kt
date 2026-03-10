@@ -1,6 +1,6 @@
-package com.ipManager.ipManager.commons.requests
+package com.ipManager.ipManager.api.requests
 
-import com.ipManager.ipManager.commons.dto.MemberDto
+import com.ipManager.ipManager.api.dto.MemberDto
 
 data class CreateMemberRequest(
     val firstName: String,

@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.services
 
-import com.ipManager.ipManager.commons.dto.MemberDto
+import com.ipManager.ipManager.api.dto.MemberDto
 import com.ipManager.ipManager.repositories.entities.MemberEntity
 import com.ipManager.ipManager.repositories.interfaces.MemberRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -21,7 +21,6 @@ class MemberService(
             password = encodedPassword.toString(),
             email = memberDto.email
         )
-
         memberRepository.save(memberEntity)
     }
 }
