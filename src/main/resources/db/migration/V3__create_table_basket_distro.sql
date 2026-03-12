@@ -3,9 +3,9 @@ CREATE TABLE basket_distro(
     api_id VARCHAR(255) NOT NULL UNIQUE,
     quantity INTEGER NOT NULL,
     updated_at VARCHAR(255),
-    member_id VARCHAR(255),
+    member_id INTEGER,
     more_than_one BOOLEAN NOT NULL,
     justify VARCHAR(255),
 
-   FOREIGN KEY (member_id) REFERENCES members(id)
+    CONSTRAINT member_id_fk FOREIGN KEY (member_id) REFERENCES members(id)
 );
