@@ -1,4 +1,4 @@
-package com.ipManager.ipManager.controller
+package com.ipManager.ipManager.api.controller
 
 import com.ipManager.ipManager.api.dto.LoginRequestDto
 import com.ipManager.ipManager.api.responses.LoginResponseDto
