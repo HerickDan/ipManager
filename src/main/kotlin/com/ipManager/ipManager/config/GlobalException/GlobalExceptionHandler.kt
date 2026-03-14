@@ -18,4 +18,14 @@ class GlobalExceptionHandler {
             )
         )
     }
+
+    @ExceptionHandler(BadRequestException::class)
+    fun businessException(badRequest: BadRequestException): ResponseEntity<ErrorDto>{
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            ErrorDto(
+                statusCode = HttpStatus.BAD_REQUEST,
+                errorMessage = badRequest.message!!
+            )
+        )
+    }
 }

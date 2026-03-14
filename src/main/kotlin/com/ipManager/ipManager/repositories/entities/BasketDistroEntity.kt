@@ -10,7 +10,7 @@ import jakarta.persistence.Table
 import java.time.ZonedDateTime
 
 @Entity
-@Table(name="")
+@Table(name="basket_distro")
 data class BasketDistroEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
