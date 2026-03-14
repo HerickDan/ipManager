@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import java.util.UUID
 
 @Entity
 @Table(name= "members")
@@ -15,7 +16,7 @@ data class MemberEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long ?= null,
-    val apiId: String ? = null,
+    val apiId: String ? = UUID.randomUUID().toString(),
     val firstName: String,
     val lastName: String,
     val email: String,
