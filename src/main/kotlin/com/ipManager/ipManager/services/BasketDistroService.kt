@@ -1,5 +1,7 @@
 package com.ipManager.ipManager.services
 
+import com.ipManager.ipManager.api.dto.RegisterDistroDto
+import com.ipManager.ipManager.repositories.entities.BasketDistroEntity
 import com.ipManager.ipManager.repositories.entities.BasketEntity
 import com.ipManager.ipManager.repositories.interfaces.BasketDistroRepository
 import com.ipManager.ipManager.repositories.interfaces.BasketStockRepository
@@ -12,10 +14,17 @@ class BasketDistroService(
     private val distroRepository: BasketDistroRepository,
     private val memberRepository: MemberRepository
 ) {
-    fun register(memberId: String) {
-        val member = memberRepository.findByApiId(memberId)
+    fun register(dto: RegisterDistroDto) {
+        val member = memberRepository.findByApiId(dto.memberId)
         if (member != null && baskets()!=null) {
-
+            distroRepository.save(
+                BasketDistroEntity(
+                    quantity = dto.quantity!!,
+                    member = member,
+                    moreThanOne = dto.moreThanOne,
+                    justify =  dto.justify
+                )
+            )
         }
     }
 
