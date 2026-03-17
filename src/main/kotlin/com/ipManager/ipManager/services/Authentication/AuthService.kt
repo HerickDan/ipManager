@@ -31,7 +31,7 @@
                     auth.authorities.first().authority.toString()
                 )
             } catch (ex: AuthenticationException) {
-                throw BadCredentialsException("Email ou senha inválidos")
+                throw BadCredentialsException("Invalid email or password")
             }
         }
 

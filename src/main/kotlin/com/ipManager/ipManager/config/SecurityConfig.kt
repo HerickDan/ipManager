@@ -30,10 +30,8 @@ class SecurityConfig(
                 it.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
             }
             .authorizeHttpRequests { auth ->
-                auth.requestMatchers(HttpMethod.POST,"/member").permitAll()
+                auth.requestMatchers(HttpMethod.POST,"/member").authenticated()
                 auth.requestMatchers("/auth").permitAll()
-                auth.requestMatchers("/payment").authenticated()
-                auth.requestMatchers("/auth/hello").authenticated()
             }
             .securityContext {
                 it.requireExplicitSave(false)
