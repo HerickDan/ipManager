@@ -3,7 +3,7 @@
     import com.ipManager.ipManager.api.dto.LoginRequestDto
     import com.ipManager.ipManager.api.responses.LoginResponseDto
     import com.ipManager.ipManager.commons.errorMessages.ErrorMessages
-    import com.ipManager.ipManager.config.GlobalException.NotFoundException
+    import com.ipManager.ipManager.config.Exceptions.NotFoundException
     import com.ipManager.ipManager.repositories.interfaces.MemberRepository
     import jakarta.servlet.http.HttpServletRequest
     import org.springframework.security.authentication.AuthenticationManager

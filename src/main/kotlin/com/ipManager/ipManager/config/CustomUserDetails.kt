@@ -1,7 +1,7 @@
 package com.ipManager.ipManager.config
 
 import com.ipManager.ipManager.commons.errorMessages.ErrorMessages
-import com.ipManager.ipManager.config.GlobalException.NotFoundException
+import com.ipManager.ipManager.config.Exceptions.NotFoundException
 import com.ipManager.ipManager.repositories.interfaces.MemberRepository
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails

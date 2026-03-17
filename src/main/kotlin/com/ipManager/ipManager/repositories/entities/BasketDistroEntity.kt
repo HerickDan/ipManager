@@ -10,14 +10,14 @@ import jakarta.persistence.Table
 import java.time.ZonedDateTime
 
 @Entity
-@Table(name="")
+@Table(name="basket_distro")
 data class BasketDistroEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long ?= null,
     val apiId: String ? = null,
     val quantity: Int,
-    val updatedAt: ZonedDateTime ?= ZonedDateTime.now(),
+    val distributedIn: ZonedDateTime ?= ZonedDateTime.now(),
     @ManyToOne
     @JoinColumn("member_id")
     val member: MemberEntity,
