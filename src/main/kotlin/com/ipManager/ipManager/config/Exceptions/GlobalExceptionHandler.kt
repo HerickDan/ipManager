@@ -1,4 +1,4 @@
-package com.ipManager.ipManager.config.GlobalException
+package com.ipManager.ipManager.config.Exceptions
 
 import com.ipManager.ipManager.api.dto.ErrorDto
 import org.springframework.http.HttpStatus
@@ -24,6 +24,16 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             ErrorDto(
                 statusCode = HttpStatus.BAD_REQUEST,
+                errorMessage = badRequest.message!!
+            )
+        )
+    }
+
+    @ExceptionHandler(ConflictException::class)
+    fun businessException(badRequest: ConflictException): ResponseEntity<ErrorDto>{
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+            ErrorDto(
+                statusCode = HttpStatus.CONFLICT,
                 errorMessage = badRequest.message!!
             )
         )

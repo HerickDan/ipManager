@@ -17,7 +17,7 @@ data class BasketDistroEntity (
     val id: Long ?= null,
     val apiId: String ? = null,
     val quantity: Int,
-    val updatedAt: ZonedDateTime ?= ZonedDateTime.now(),
+    val distributedIn: ZonedDateTime ?= ZonedDateTime.now(),
     @ManyToOne
     @JoinColumn("member_id")
     val member: MemberEntity,

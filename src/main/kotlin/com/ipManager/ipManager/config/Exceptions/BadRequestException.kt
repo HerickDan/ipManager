@@ -1,4 +1,4 @@
-package com.ipManager.ipManager.config.GlobalException
+package com.ipManager.ipManager.config.Exceptions
 
 import com.ipManager.ipManager.commons.errorMessages.ErrorMessages
 
