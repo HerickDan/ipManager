@@ -2,7 +2,7 @@ package com.ipManager.ipManager.services
 
 import com.ipManager.ipManager.api.dto.MemberDto
 import com.ipManager.ipManager.commons.errorMessages.ErrorMessages
-import com.ipManager.ipManager.config.GlobalException.BadRequestException
+import com.ipManager.ipManager.config.Exceptions.BadRequestException
 import com.ipManager.ipManager.repositories.entities.MemberEntity
 import com.ipManager.ipManager.repositories.interfaces.MemberRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
