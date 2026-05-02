@@ -16,6 +16,7 @@
     @Service
     class AuthService(
         private val authManger: AuthenticationManager,
+
         private val memberRepository: MemberRepository
     ) {
         fun login(login: LoginRequestDto): LoginResponseDto {
