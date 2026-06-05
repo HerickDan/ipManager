@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BasketDistroRepository: JpaRepository<BasketDistroEntity,Long> {
     @Query("""
-    SELECT b FROM BasicBasketDistribution b
-    WHERE b.user = :user
+    SELECT b FROM BasketDistroEntity b
+    WHERE b.member = :member
     AND YEAR(b.distributedIn) = :year
     AND MONTH(b.distributedIn) = :month
 """)

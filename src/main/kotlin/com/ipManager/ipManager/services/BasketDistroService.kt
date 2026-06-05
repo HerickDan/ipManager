@@ -19,9 +19,11 @@ class BasketDistroService(
     private val memberRepository: MemberRepository
 ) {
     fun register(dto: RegisterDistroDto) {
+        // Will look for the member on the database
         val member =
             memberRepository.findByApiId(dto.memberId) ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
-        val baskets = baskets() ?: throw NotFoundException(ErrorMessages.BASKETS_NOT_FOUND)
+        // will look form some basket in the database
+        val basketQuantity = baskets() ?: throw NotFoundException(ErrorMessages.BASKETS_NOT_FOUND)
         val date = ZonedDateTime.now()
         val distributedBasket = distroRepository.findByMemberAndMonthAndYear(
             member,
@@ -29,12 +31,12 @@ class BasketDistroService(
             year = date.year,
         )
 
-        if (dto.quantity!! > baskets.quantity) {
+        if (dto.quantity!! > basketQuantity.quantity) {
             throw ConflictException(ErrorMessages.QUANTITY_EXCEEDS)
         }
 
         baskets()?.quantity.let { it ->
-            if (distributedBasket.size < 2) {
+            if (distributedBasket.size <= 2) {
                 distroRepository.save(
                     BasketDistroEntity(
                         quantity = dto.quantity,
@@ -47,6 +49,7 @@ class BasketDistroService(
         }
     }
 
+    // will look form some basket in the database
     private fun baskets(): BasketEntity? {
         val basket = basketRepository.findAll().first()
         return if (basket.quantity > 0) {
