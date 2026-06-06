@@ -7,5 +7,5 @@ CREATE TABLE basket_distro(
     more_than_one BOOLEAN NOT NULL,
     justify VARCHAR(255),
 
-    CONSTRAINT member_id_fk FOREIGN KEY (member_id) REFERENCES members(id)
+    CONSTRAINT member_id_fk FOREIGN KEY (member_id) REFERENCES admins(id)
 );
