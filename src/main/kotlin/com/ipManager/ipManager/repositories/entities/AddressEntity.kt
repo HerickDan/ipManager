@@ -1,13 +1,19 @@
 package com.ipManager.ipManager.repositories.entities
 
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "Address")
+@Table(name = "address")
 data class AddressEntity (
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
     val name: String,
     val complement: String? = null,
     val number: Int,

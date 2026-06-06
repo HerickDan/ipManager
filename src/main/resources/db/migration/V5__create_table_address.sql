@@ -1,4 +1,5 @@
 CREATE TABLE address(
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     complement VARCHAR(255),
     number INT NOT NULL,
