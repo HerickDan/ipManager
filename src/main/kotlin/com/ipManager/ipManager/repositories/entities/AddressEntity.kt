@@ -1,5 +1,6 @@
 package com.ipManager.ipManager.repositories.entities
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -10,7 +11,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "address")
-data class AddressEntity (
+data class AddressEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -18,6 +19,6 @@ data class AddressEntity (
     val complement: String? = null,
     val number: Int,
     @OneToOne
-    @JoinColumn("member_id")
-    val residentEntity: BeneficiarieEntity
+    @JoinColumn(name = "resident", referencedColumnName = "id")
+    val resident: BeneficiariesEntity
 )

@@ -9,7 +9,7 @@ import java.util.UUID
 
 @Table(name = "beneficiaries")
 @Entity
-data class BeneficiarieEntity(
+data class BeneficiariesEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -17,4 +17,5 @@ data class BeneficiarieEntity(
     val firstName: String,
     val lastName: String,
     val familyMembersNumber: Int? = 0,
+    val active: Boolean? = true
 )
