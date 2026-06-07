@@ -32,6 +32,7 @@ class SecurityConfig(
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers(HttpMethod.POST,"/member").authenticated()
                 auth.requestMatchers("/auth").permitAll()
+                auth.requestMatchers("/beneficiaries").permitAll()
             }
             .securityContext {
                 it.requireExplicitSave(false)

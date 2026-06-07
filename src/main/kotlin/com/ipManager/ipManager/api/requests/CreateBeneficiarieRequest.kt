@@ -5,20 +5,22 @@ import com.ipManager.ipManager.api.dto.CellPhoneDto
 import com.ipManager.ipManager.api.dto.CreateBeneficiariesDto
 
 data class CreateBeneficiariesRequest(
-    val name: String,
+    val firstName: String,
+    val lastName: String,
     val familyMemberNumber: Int,
-    val number: CellPhoneRequest,
+    //val number: CellPhoneRequest,
     val address: AddressRequest
 ){
     fun toDto(): CreateBeneficiariesDto{
        return CreateBeneficiariesDto(
-            name = this.name,
+            firstName = this.firstName,
+           lastName = this.lastName,
             familyMemberNumber = this.familyMemberNumber,
-            number = CellPhoneDto(
-                countryCode = this.number.countryCode,
-                ddd = this.number.ddd,
-                prefixLine = this.number.countryCode
-            ),
+//            number = CellPhoneDto(
+//                countryCode = this.number.countryCode,
+//                ddd = this.number.ddd,
+//                prefixLine = this.number.countryCode
+//            ),
             address = AddressDto(
                 name = this.address.name,
                 complement = this.address.complement,
