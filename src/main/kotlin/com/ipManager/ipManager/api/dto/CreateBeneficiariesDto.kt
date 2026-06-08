@@ -6,7 +6,8 @@ data class CreateBeneficiariesDto(
     val firstName: String,
     val lastName: String,
     val familyMemberNumber: Int,
-    val address: AddressDto
+    val address: AddressDto,
+    val number: CellPhoneDto
 ) {
     fun toMemberEntityEntity() = BeneficiariesEntity(
         firstName = this.firstName,
