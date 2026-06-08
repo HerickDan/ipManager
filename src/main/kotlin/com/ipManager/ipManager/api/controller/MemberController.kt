@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.api.controller
 
-import com.ipManager.ipManager.api.requests.CreateMemberRequest
+import com.ipManager.ipManager.api.requests.CreateAdminRequest
 import com.ipManager.ipManager.services.MemberService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,7 +16,7 @@ class MemberController(private val memberService: MemberService) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(
-        @RequestBody request: CreateMemberRequest
+        @RequestBody request: CreateAdminRequest
     ) {
         memberService.createMember(request.toDto())
     }

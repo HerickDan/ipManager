@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.services
 
-import com.ipManager.ipManager.api.dto.MemberDto
+import com.ipManager.ipManager.api.dto.AdminDto
 import com.ipManager.ipManager.commons.errorMessages.ErrorMessages
 import com.ipManager.ipManager.config.Exceptions.BadRequestException
 import com.ipManager.ipManager.repositories.entities.MemberEntity
@@ -14,14 +14,14 @@ class MemberService(
     private val memberRepository: MemberRepository,
     private var passwordEncoder: PasswordEncoder
 ) {
-    fun createMember(memberDto: MemberDto) {
+    fun createMember(adminDto: AdminDto) {
         passwordEncoder = BCryptPasswordEncoder()
-        val encodedPassword = passwordEncoder.encode(memberDto.password)
+        val encodedPassword = passwordEncoder.encode(adminDto.password)
         val memberEntity = MemberEntity(
-            firstName = memberDto.firstName,
-            lastName = memberDto.lastName,
+            firstName = adminDto.firstName,
+            lastName = adminDto.lastName,
             password = encodedPassword.toString(),
-            email = memberDto.email
+            email = adminDto.email
         )
         try {
             memberRepository.save(memberEntity)

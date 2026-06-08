@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.api.dto
 
-data class MemberDto(
+data class AdminDto(
     val firstName: String,
     val lastName: String,
     val password: String,
