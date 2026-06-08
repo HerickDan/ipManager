@@ -17,5 +17,5 @@ data class BeneficiariesEntity(
     val firstName: String,
     val lastName: String,
     val familyMembersNumber: Int? = 0,
-    val active: Boolean? = true
+    var active: Boolean? = true
 )

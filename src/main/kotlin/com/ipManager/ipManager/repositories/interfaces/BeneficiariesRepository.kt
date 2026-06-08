@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface BeneficiariesRepository: JpaRepository<BeneficiariesEntity, Long> {
-    
+    fun findByApiId(apiId: String): BeneficiariesEntity?
 }

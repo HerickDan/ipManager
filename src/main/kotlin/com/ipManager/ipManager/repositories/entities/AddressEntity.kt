@@ -15,9 +15,9 @@ data class AddressEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val name: String,
-    val complement: String? = null,
-    val number: Int,
+    var name: String,
+    var complement: String? = null,
+    var number: Int,
     @OneToOne
     @JoinColumn(name = "resident", referencedColumnName = "id")
     val resident: BeneficiariesEntity
