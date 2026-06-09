@@ -19,7 +19,7 @@ data class CreateBeneficiariesRequest(
             number = CellPhoneDto(
                 countryCode = this.number.countryCode,
                 ddd = this.number.ddd,
-                prefixLine = this.number.countryCode
+                prefixLine = this.number.prefixLine
             ),
             address = AddressDto(
                 name = this.address.name,

@@ -11,7 +11,7 @@ data class CreateAdminRequest(
     ) {
     fun toDto(): AdminDto =
         AdminDto(
-            firstName = this.email,
+            firstName = this.firstName,
             lastName = this.lastName,
             password = this.password,
             email = this.email
