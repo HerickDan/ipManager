@@ -1,9 +1,11 @@
 package com.ipManager.ipManager.api.controller
 
+import com.ipManager.ipManager.api.dto.ReadBeneficiariesDto
 import com.ipManager.ipManager.api.requests.CreateBeneficiariesRequest
 import com.ipManager.ipManager.api.requests.UpdateUserInfoRequest
 import com.ipManager.ipManager.services.BeneficiariesService
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -39,5 +41,12 @@ class BeneficiariesController(
         @RequestBody req: UpdateUserInfoRequest
     ) {
         service.updateUserInfo(id, req.toDto())
+    }
+
+    @GetMapping("/{id}")
+    fun findBeneficiaryById(
+        @PathVariable id: String
+    ): ReadBeneficiariesDto {
+        return service.findBeneficiaryById(id)
     }
 }

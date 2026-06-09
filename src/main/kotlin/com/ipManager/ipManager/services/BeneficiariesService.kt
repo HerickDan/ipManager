@@ -1,6 +1,9 @@
 package com.ipManager.ipManager.services
 
+import com.ipManager.ipManager.api.dto.AddressDto
+import com.ipManager.ipManager.api.dto.CellPhoneDto
 import com.ipManager.ipManager.api.dto.CreateBeneficiariesDto
+import com.ipManager.ipManager.api.dto.ReadBeneficiariesDto
 import com.ipManager.ipManager.api.dto.UpdateUserInfoDto
 import com.ipManager.ipManager.commons.errorMessages.ErrorMessages
 import com.ipManager.ipManager.config.Exceptions.NotFoundException
@@ -41,6 +44,29 @@ class BeneficiariesService(
         )
 
 
+    }
+
+    fun findBeneficiaryById(id:String): ReadBeneficiariesDto{
+        val beneficiary = beneficiariesRepository.findByApiId(id)
+            ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
+        val address = addressRepository.findByResident(beneficiary)
+        val cellInfo = cellPhoneRepository.findByResident(beneficiary)
+
+        return ReadBeneficiariesDto(
+            firstName = beneficiary.firstName,
+            lastName = beneficiary.lastName,
+            familyMemberNumber = beneficiary.familyMembersNumber!!,
+            address = AddressDto(
+                name =  address.name,
+                complement = address.complement,
+                number = address.number
+            ),
+            number = CellPhoneDto(
+                countryCode = cellInfo.countryCode,
+                ddd = cellInfo.ddd,
+                prefixLine = cellInfo.prefixLine
+            )
+        )
     }
 
     fun disableBeneficiary(id: String) {
