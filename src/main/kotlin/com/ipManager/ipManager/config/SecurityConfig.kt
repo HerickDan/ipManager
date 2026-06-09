@@ -30,9 +30,10 @@ class SecurityConfig(
                 it.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
             }
             .authorizeHttpRequests { auth ->
-                auth.requestMatchers(HttpMethod.POST,"/member").authenticated()
+                auth.requestMatchers(HttpMethod.POST, "/member").authenticated()
                 auth.requestMatchers("/auth").permitAll()
                 auth.requestMatchers("/beneficiaries").permitAll()
+                auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/{id}").permitAll()
                 auth.requestMatchers("/beneficiaries/disable/{id}").permitAll()
             }
             .securityContext {

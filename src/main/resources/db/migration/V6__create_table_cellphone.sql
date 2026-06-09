@@ -1,2 +1,3 @@
 CREATE TABLE cellphone(
+     id SERIAL PRIMARY KEY
 )

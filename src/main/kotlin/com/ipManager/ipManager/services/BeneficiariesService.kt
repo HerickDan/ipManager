@@ -5,19 +5,32 @@ import com.ipManager.ipManager.api.dto.UpdateUserInfoDto
 import com.ipManager.ipManager.commons.errorMessages.ErrorMessages
 import com.ipManager.ipManager.config.Exceptions.NotFoundException
 import com.ipManager.ipManager.repositories.entities.AddressEntity
+import com.ipManager.ipManager.repositories.entities.CellPhoneEntity
 import com.ipManager.ipManager.repositories.interfaces.AddressRepository
 import com.ipManager.ipManager.repositories.interfaces.BeneficiariesRepository
+import com.ipManager.ipManager.repositories.interfaces.CellPhoneRepository
 import org.springframework.stereotype.Service
 
 @Service
 class BeneficiariesService(
     val beneficiariesRepository: BeneficiariesRepository,
-    val addressRepository: AddressRepository
+    val addressRepository: AddressRepository,
+    val cellPhoneRepository: CellPhoneRepository
 ) {
     fun createBeneficiary(req: CreateBeneficiariesDto) {
         val beneficiary = beneficiariesRepository.save(req.toMemberEntityEntity())
         val addressParameters = req.address
-
+        val cellParameters = req.number
+        
+        cellPhoneRepository.save(
+            CellPhoneEntity(
+                countryCode = cellParameters.countryCode,
+                ddd = cellParameters.ddd,
+                prefixLine = cellParameters.prefixLine,
+                phoneOwner = beneficiary
+            )
+        )
+        
         addressRepository.save(
             AddressEntity(
                 name = addressParameters.name,
@@ -26,6 +39,8 @@ class BeneficiariesService(
                 resident = beneficiary
             )
         )
+
+
     }
 
     fun disableBeneficiary(id: String) {
@@ -45,6 +60,15 @@ class BeneficiariesService(
             complement = req.complement ?: address.complement,
             number = req.number ?: address.number
         )
+
+        val cellInfo = cellPhoneRepository.findByResident(beneficiary)
+        val updatedCell = cellInfo.copy(
+            countryCode = req.countryCode ?: cellInfo.countryCode,
+            ddd = req.ddd ?: cellInfo.ddd,
+            prefixLine = req.prefixLine ?: cellInfo.prefixLine
+        )
+
+        cellPhoneRepository.save(updatedCell)
         addressRepository.save(updatedAddress)
     }
 }

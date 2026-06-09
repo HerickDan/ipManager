@@ -38,6 +38,6 @@ class BeneficiariesController(
         @PathVariable id: String,
         @RequestBody req: UpdateUserInfoRequest
     ) {
-        // TO-DO
+        service.updateUserInfo(id, req.toDto())
     }
 }
