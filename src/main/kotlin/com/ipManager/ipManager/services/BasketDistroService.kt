@@ -8,7 +8,8 @@ import com.ipManager.ipManager.repositories.entities.BasketDistroEntity
 import com.ipManager.ipManager.repositories.entities.BasketEntity
 import com.ipManager.ipManager.repositories.interfaces.BasketDistroRepository
 import com.ipManager.ipManager.repositories.interfaces.BasketStockRepository
-import com.ipManager.ipManager.repositories.interfaces.MemberRepository
+import com.ipManager.ipManager.repositories.interfaces.BeneficiariesRepository
+import com.ipManager.ipManager.repositories.interfaces.AdminRepository
 import org.springframework.stereotype.Service
 import java.time.ZonedDateTime
 
@@ -16,17 +17,21 @@ import java.time.ZonedDateTime
 class BasketDistroService(
     private val basketRepository: BasketStockRepository,
     private val distroRepository: BasketDistroRepository,
-    private val memberRepository: MemberRepository
+    private val adminRepository: AdminRepository,
+    private val beneficiariesRepository: BeneficiariesRepository
 ) {
     fun register(dto: RegisterDistroDto) {
-        // Will look for the member on the database
-        val member =
-            memberRepository.findByApiId(dto.memberId) ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
+        // Will look for the admin on the database
+        val admin =
+            adminRepository.findByApiId(dto.adminId) ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
+        // Will look for the beneficiary on the database
+        val beneficiary =
+            beneficiariesRepository.findByApiId(dto.beneficiaryId) ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
         // will look form some basket in the database
         val basketQuantity = baskets() ?: throw NotFoundException(ErrorMessages.BASKETS_NOT_FOUND)
         val date = ZonedDateTime.now()
-        val distributedBasket = distroRepository.findByMemberAndMonthAndYear(
-            member,
+        val distributedBasket = distroRepository.findByAdminAndMonthAndYear(
+            admin,
             month = date.monthValue,
             year = date.year,
         )
@@ -40,7 +45,8 @@ class BasketDistroService(
                 distroRepository.save(
                     BasketDistroEntity(
                         quantity = dto.quantity,
-                        member = member,
+                        admin = admin,
+                        beneficiary = beneficiary,
                         moreThanOne = dto.moreThanOne,
                         justify = dto.justify
                     )

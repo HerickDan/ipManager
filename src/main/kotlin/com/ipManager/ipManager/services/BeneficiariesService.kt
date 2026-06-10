@@ -50,7 +50,7 @@ class BeneficiariesService(
         val beneficiary = beneficiariesRepository.findByApiId(id)
             ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
         val address = addressRepository.findByResident(beneficiary)
-        val cellInfo = cellPhoneRepository.findByResident(beneficiary)
+        val cellInfo = cellPhoneRepository.findByPhoneOwner(beneficiary)
 
         return ReadBeneficiariesDto(
             firstName = beneficiary.firstName,
@@ -87,7 +87,7 @@ class BeneficiariesService(
             number = req.number ?: address.number
         )
 
-        val cellInfo = cellPhoneRepository.findByResident(beneficiary)
+        val cellInfo = cellPhoneRepository.findByPhoneOwner(beneficiary)
         val updatedCell = cellInfo.copy(
             countryCode = req.countryCode ?: cellInfo.countryCode,
             ddd = req.ddd ?: cellInfo.ddd,

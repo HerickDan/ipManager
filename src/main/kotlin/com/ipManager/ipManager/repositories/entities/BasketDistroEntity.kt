@@ -20,8 +20,11 @@ data class BasketDistroEntity (
     val quantity: Int,
     val distributedIn: ZonedDateTime ?= ZonedDateTime.now(),
     @ManyToOne
-    @JoinColumn("member_id")
-    val member: MemberEntity,
+    @JoinColumn("admin_id")
+    val admin: AdminEntity,
+    @ManyToOne
+    @JoinColumn("beneficiary_id")
+    val beneficiary: BeneficiariesEntity,
     val moreThanOne: Boolean ? = false,
     val justify: String ? = null,
 )
