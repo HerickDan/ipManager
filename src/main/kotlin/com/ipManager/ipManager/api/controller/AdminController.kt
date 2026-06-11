@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/admin")
 class AdminController(private val adminService: AdminService) {
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(

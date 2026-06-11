@@ -15,6 +15,6 @@ data class BasketEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long ?= null,
     val apiId: String? = UUID.randomUUID().toString(),
-    val quantity: Int,
+    var quantity: Int,
     val updatedAt: ZonedDateTime ? = ZonedDateTime.now()
 )

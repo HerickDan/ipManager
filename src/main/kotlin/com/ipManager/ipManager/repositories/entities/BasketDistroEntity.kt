@@ -1,6 +1,5 @@
 package com.ipManager.ipManager.repositories.entities
 
-import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -19,9 +18,7 @@ data class BasketDistroEntity (
     val apiId: String ? = null,
     val quantity: Int,
     val distributedIn: ZonedDateTime ?= ZonedDateTime.now(),
-    @ManyToOne
-    @JoinColumn("admin_id")
-    val admin: AdminEntity,
+    val adminName: String,
     @ManyToOne
     @JoinColumn("beneficiary_id")
     val beneficiary: BeneficiariesEntity,

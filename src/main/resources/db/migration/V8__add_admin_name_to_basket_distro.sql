@@ -1,0 +1,1 @@
+ALTER TABLE basket_distro ADD COLUMN admin_name VARCHAR(255) NOT NULL DEFAULT '';

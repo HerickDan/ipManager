@@ -20,6 +20,8 @@
         private val adminRepository: AdminRepository
     ) {
         fun login(login: LoginRequestDto): LoginResponseDto {
+
+
             adminRepository.findByEmail(login.email) ?: throw NotFoundException(
                 ErrorMessages.NOT_FOUND_EXCEPTION)
             return try {
