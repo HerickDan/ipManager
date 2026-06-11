@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service
 @Service
 class AdminService(
     private val adminRepository: AdminRepository,
-    private var passwordEncoder: PasswordEncoder
+    private var passwordEncoder: PasswordEncoder = BCryptPasswordEncoder()
 ) {
     fun createAdmin(adminDto: AdminDto) {
-        passwordEncoder = BCryptPasswordEncoder()
         val encodedPassword = passwordEncoder.encode(adminDto.password)
         val adminEntity = AdminEntity(
             firstName = adminDto.firstName,

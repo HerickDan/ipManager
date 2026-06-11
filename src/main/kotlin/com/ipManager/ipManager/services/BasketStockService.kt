@@ -11,8 +11,16 @@ class BasketStockService(
 ) {
     fun addStock(quantity: Int) {
         val existing = basketRepository.findAll().firstOrNull()
-        basketRepository.save(existing?.copy(quantity = existing.quantity + quantity, updatedAt = ZonedDateTime.now()))
-
+        if (
+            existing != null
+        ) {
+            basketRepository.save(
+                existing.copy(
+                    quantity = existing.quantity + quantity,
+                    updatedAt = ZonedDateTime.now()
+                )
+            )
+        }
     }
 
     fun getCurrentStock(): BasketEntity? {
