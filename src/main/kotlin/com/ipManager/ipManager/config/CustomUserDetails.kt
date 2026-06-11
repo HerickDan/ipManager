@@ -14,7 +14,6 @@ class CustomUserDetails(
     private val adminRepository: AdminRepository
 ) : UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails {
-        println("userEmail" + username)
         val user = adminRepository.findByEmail(username)
             ?: throw NotFoundException(
                 ErrorMessages.NOT_FOUND_EXCEPTION

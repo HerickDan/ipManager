@@ -21,18 +21,20 @@ class BasketDistroService(
     private val beneficiariesRepository: BeneficiariesRepository,
 ) {
     fun register(dto: RegisterDistroDto) {
-        val adminName = SecurityContextHolder.getContext().authentication?.name
-            ?: throw BadRequestException(ErrorMessages.BAD_REQUEST_EXCEPTION)
+        val adminName = SecurityContextHolder.getContext().authentication!!.name
 
         val beneficiary = beneficiariesRepository.findByApiId(dto.beneficiaryId)
             ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
 
-        val basket = baskets() ?: throw NotFoundException(ErrorMessages.BASKETS_NOT_FOUND)
+        val basket = basketRepository.findAll().firstOrNull()
+            ?: throw NotFoundException(ErrorMessages.BASKETS_NOT_FOUND)
 
-        val quantity = dto.quantity ?: throw BadRequestException(ErrorMessages.BAD_REQUEST_EXCEPTION)
 
-        if (quantity > basket.quantity) {
-            throw ConflictException(ErrorMessages.QUANTITY_EXCEEDS)
+
+        dto.quantity?.let {
+            if (it > basket.quantity) {
+                throw ConflictException(ErrorMessages.QUANTITY_EXCEEDS)
+            }
         }
 
         val date = ZonedDateTime.now()
@@ -48,7 +50,7 @@ class BasketDistroService(
 
         distroRepository.save(
             BasketDistroEntity(
-                quantity = quantity,
+                quantity = dto.quantity!!,
                 adminName = adminName,
                 beneficiary = beneficiary,
                 moreThanOne = dto.moreThanOne,
@@ -56,13 +58,7 @@ class BasketDistroService(
             )
         )
 
-        basketRepository.save(basket.copy(quantity = basket.quantity - quantity))
+        basketRepository.save(basket.copy(quantity = basket.quantity - dto.quantity))
     }
 
-    private fun baskets(): BasketEntity? {
-        val all = basketRepository.findAll()
-        if (all.isEmpty()) return null
-        val basket = all.first()
-        return if (basket.quantity > 0) basket else null
-    }
 }

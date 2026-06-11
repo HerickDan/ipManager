@@ -17,8 +17,8 @@ class BasketStockController(
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun addStock(@RequestBody request: Map<String, Int>) {
-        val quantity = request["quantity"] ?: throw IllegalArgumentException("quantity is required")
+    fun addStock(@RequestBody request: Int?) {
+        val quantity = request ?: throw IllegalArgumentException("quantity is required")
         basketStockService.addStock(quantity)
     }
 
