@@ -1,13 +1,9 @@
-FROM ubuntu:latest
-LABEL authors="heric"
-
-ENTRYPOINT ["top", "-b"]
-
 FROM gradle:8-jdk21 AS build
 COPY src /app/src
 COPY build.gradle settings.gradle gradlew /app/
 COPY gradle /app/gradle
 WORKDIR /app
+RUN chmod +x ./gradlew
 RUN ./gradlew clean build
 
 FROM amazoncorretto:21
