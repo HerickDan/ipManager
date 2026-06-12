@@ -35,6 +35,12 @@ class SecurityConfig(
                 auth.requestMatchers("/beneficiaries").permitAll()
                 auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/{id}").permitAll()
                 auth.requestMatchers("/beneficiaries/disable/{id}").permitAll()
+                auth
+                    .requestMatchers(
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/v3/api-docs/**"
+                    ).permitAll()
             }
             .securityContext {
                 it.requireExplicitSave(false)

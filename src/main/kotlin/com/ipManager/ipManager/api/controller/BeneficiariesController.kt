@@ -4,6 +4,8 @@ import com.ipManager.ipManager.api.dto.ReadBeneficiariesDto
 import com.ipManager.ipManager.api.requests.CreateBeneficiariesRequest
 import com.ipManager.ipManager.api.requests.UpdateUserInfoRequest
 import com.ipManager.ipManager.services.BeneficiariesService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
+@Tag(name="Beneficiaries")
 @RequestMapping("/beneficiaries")
 class BeneficiariesController(
     val service: BeneficiariesService
 ) {
+    @Operation(summary = "Add beneficiary")
     @PostMapping
     fun createBeneficiary(
         @RequestBody request: CreateBeneficiariesRequest
@@ -28,6 +32,7 @@ class BeneficiariesController(
         )
     }
 
+    @Operation(summary = "Disable beneficiary")
     @DeleteMapping("/{id}")
     fun disableBeneficiary(
         @PathVariable id: String
@@ -35,6 +40,7 @@ class BeneficiariesController(
         service.disableBeneficiary(id)
     }
 
+    @Operation(summary = "Update beneficiary")
     @PatchMapping("/{id}")
     fun updateUserInfo(
         @PathVariable id: String,
@@ -43,6 +49,8 @@ class BeneficiariesController(
         service.updateUserInfo(id, req.toDto())
     }
 
+
+    @Operation(summary = "Find beneficiary")
     @GetMapping("/{id}")
     fun findBeneficiaryById(
         @PathVariable id: String

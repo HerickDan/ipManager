@@ -2,6 +2,7 @@ package com.ipManager.ipManager.api.controller
 
 import com.ipManager.ipManager.api.requests.CreateAdminRequest
 import com.ipManager.ipManager.services.AdminService
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/admin")
+@Tag(name = "Admin journey")
 class AdminController(private val adminService: AdminService) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

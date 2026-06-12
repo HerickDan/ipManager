@@ -3,12 +3,14 @@ package com.ipManager.ipManager.api.controller
 import com.ipManager.ipManager.api.dto.LoginRequestDto
 import com.ipManager.ipManager.api.responses.LoginResponseDto
 import com.ipManager.ipManager.services.Authentication.AuthService
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@Tag(name="Authentication")
 @RequestMapping("/auth")
 class LoginController(
     private val service: AuthService
