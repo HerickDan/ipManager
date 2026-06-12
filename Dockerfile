@@ -1,8 +1,3 @@
-FROM ubuntu:latest
-LABEL authors="heric"
-
-ENTRYPOINT ["top", "-b"]
-
 FROM gradle:8-jdk21 AS build
 COPY src /app/src
 COPY build.gradle settings.gradle gradlew /app/
