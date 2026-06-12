@@ -3,6 +3,7 @@ COPY src /app/src
 COPY build.gradle settings.gradle gradlew /app/
 COPY gradle /app/gradle
 WORKDIR /app
+RUN chmod +x ./gradlew
 RUN ./gradlew clean build
 
 FROM amazoncorretto:21
