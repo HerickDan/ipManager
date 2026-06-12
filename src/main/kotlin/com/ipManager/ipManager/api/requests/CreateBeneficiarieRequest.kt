@@ -3,12 +3,15 @@ package com.ipManager.ipManager.api.requests
 import com.ipManager.ipManager.api.dto.AddressDto
 import com.ipManager.ipManager.api.dto.CellPhoneDto
 import com.ipManager.ipManager.api.dto.CreateBeneficiariesDto
+import jakarta.validation.Valid
 
 data class CreateBeneficiariesRequest(
     val firstName: String,
     val lastName: String,
     val familyMemberNumber: Int,
+    @field:Valid
     val number: CellPhoneRequest,
+    @field:Valid
     val address: AddressRequest
 ){
     fun toDto(): CreateBeneficiariesDto{
