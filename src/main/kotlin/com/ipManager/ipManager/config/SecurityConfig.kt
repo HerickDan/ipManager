@@ -1,5 +1,6 @@
 package com.ipManager.ipManager.config
 
+import com.ipManager.ipManager.commons.enums.Role
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -14,7 +15,6 @@ import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 class SecurityConfig(
-    private val authConfig: AuthenticationConfiguration,
     private val customerUserDetails: CustomUserDetails
 ) {
     @Bean
@@ -32,9 +32,17 @@ class SecurityConfig(
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers(HttpMethod.POST, "/admin").permitAll()
                 auth.requestMatchers("/auth").permitAll()
-                auth.requestMatchers("/beneficiaries").permitAll()
-                auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/{id}").permitAll()
-                auth.requestMatchers("/beneficiaries/disable/{id}").permitAll()
+
+                auth.requestMatchers(HttpMethod.POST,"/beneficiaries").hasAuthority(Role.REVEREND.name)
+                auth.requestMatchers(HttpMethod.DELETE,"/beneficiaries/{id}").hasAuthority(Role.REVEREND.name)
+                auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/{id}").authenticated()
+                auth.requestMatchers(HttpMethod.GET,"/beneficiaries/{id}").authenticated()
+
+                auth.requestMatchers(HttpMethod.POST,"/distributions").authenticated()
+                auth.requestMatchers(HttpMethod.GET, "/baskets/stock").authenticated()
+                auth.requestMatchers(HttpMethod.POST,"/baskets/stock/{quantity}").authenticated()
+
+
                 auth
                     .requestMatchers(
                         "/swagger-ui/**",

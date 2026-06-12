@@ -20,6 +20,14 @@ class BasketStockService(
                     updatedAt = ZonedDateTime.now()
                 )
             )
+        } else {
+            basketRepository.save(
+                BasketEntity(
+                    quantity = quantity,
+                    updatedAt = ZonedDateTime.now()
+                )
+
+            )
         }
     }
 
