@@ -22,13 +22,10 @@ class BasketDistroService(
 ) {
     fun register(dto: RegisterDistroDto) {
         val adminName = SecurityContextHolder.getContext().authentication!!.name
-
         val beneficiary = beneficiariesRepository.findByApiId(dto.beneficiaryId)
             ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
-
         val basket = basketRepository.findAll().firstOrNull()
             ?: throw NotFoundException(ErrorMessages.BASKETS_NOT_FOUND)
-
 
 
         dto.quantity?.let {
@@ -60,5 +57,4 @@ class BasketDistroService(
 
         basketRepository.save(basket.copy(quantity = basket.quantity - dto.quantity))
     }
-
 }
