@@ -3,6 +3,7 @@ package com.ipManager.ipManager.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
 
@@ -10,29 +11,21 @@ import org.springframework.web.filter.CorsFilter
 class CorsConfig {
 
     @Bean
-    fun corsFilter(): CorsFilter {
-        val config = CorsConfiguration()
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuration = CorsConfiguration()
 
-        config.allowedOrigins = listOf(
+        configuration.allowedOrigins = listOf(
             "http://localhost:3000",
             "https://seu-frontend.vercel.app"
         )
 
-        config.allowedMethods = listOf(
-            "GET",
-            "POST",
-            "PUT",
-            "DELETE",
-            "PATCH",
-            "OPTIONS"
-        )
-
-        config.allowedHeaders = listOf("*")
-        config.allowCredentials = true
+        configuration.allowedMethods = listOf("*")
+        configuration.allowedHeaders = listOf("*")
+        configuration.allowCredentials = true
 
         val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", config)
+        source.registerCorsConfiguration("/**", configuration)
 
-        return CorsFilter(source)
+        return source
     }
 }
