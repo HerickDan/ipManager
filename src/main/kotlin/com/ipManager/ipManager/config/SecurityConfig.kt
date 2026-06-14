@@ -43,7 +43,7 @@ class SecurityConfig(
                 auth.requestMatchers(HttpMethod.POST,"/distributions").authenticated()
                 auth.requestMatchers(HttpMethod.GET,"/distributions").authenticated()
                 auth.requestMatchers(HttpMethod.GET, "/baskets/stock").authenticated()
-                auth.requestMatchers(HttpMethod.POST,"/baskets/stock/{quantity}").authenticated()
+                auth.requestMatchers("/baskets/stock/{quantity}").authenticated()
 
 
                 auth
