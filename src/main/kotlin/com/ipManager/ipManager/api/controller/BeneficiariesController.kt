@@ -32,6 +32,10 @@ class BeneficiariesController(
         )
     }
 
+    @Operation(summary = "Find All Beneficiaries")
+    @GetMapping
+    fun getAll(): List<ReadBeneficiariesDto> =  service.findAllBeneficiaries()
+
     @Operation(summary = "Disable beneficiary")
     @DeleteMapping("/{id}")
     fun disableBeneficiary(

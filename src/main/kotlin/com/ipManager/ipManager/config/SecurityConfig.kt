@@ -37,6 +37,7 @@ class SecurityConfig(
                 auth.requestMatchers(HttpMethod.POST,"/beneficiaries").hasAuthority(Role.REVEREND.name)
                 auth.requestMatchers(HttpMethod.DELETE,"/beneficiaries/{id}").hasAuthority(Role.REVEREND.name)
                 auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/{id}").authenticated()
+                auth.requestMatchers(HttpMethod.GET, "/beneficiaries").authenticated()
                 auth.requestMatchers(HttpMethod.GET,"/beneficiaries/{id}").authenticated()
 
                 auth.requestMatchers(HttpMethod.POST,"/distributions").authenticated()
