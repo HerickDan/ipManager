@@ -26,8 +26,9 @@ class SecurityConfig(
     fun securityFilter(http: HttpSecurity): SecurityFilterChain {
         return http
             .csrf { it.disable() }
+            .cors { }
             .sessionManagement {
-                it.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                it.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
             }
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers(HttpMethod.POST, "/admin").permitAll()
@@ -36,9 +37,11 @@ class SecurityConfig(
                 auth.requestMatchers(HttpMethod.POST,"/beneficiaries").hasAuthority(Role.REVEREND.name)
                 auth.requestMatchers(HttpMethod.DELETE,"/beneficiaries/{id}").hasAuthority(Role.REVEREND.name)
                 auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/{id}").authenticated()
+                auth.requestMatchers(HttpMethod.GET, "/beneficiaries").authenticated()
                 auth.requestMatchers(HttpMethod.GET,"/beneficiaries/{id}").authenticated()
 
                 auth.requestMatchers(HttpMethod.POST,"/distributions").authenticated()
+                auth.requestMatchers(HttpMethod.GET,"/distributions").authenticated()
                 auth.requestMatchers(HttpMethod.GET, "/baskets/stock").authenticated()
                 auth.requestMatchers(HttpMethod.POST,"/baskets/stock/{quantity}").authenticated()
 

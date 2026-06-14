@@ -53,6 +53,7 @@ class BeneficiariesService(
         val cellInfo = cellPhoneRepository.findByPhoneOwner(beneficiary)
 
         return ReadBeneficiariesDto(
+            id = beneficiary.apiId!!,
             firstName = beneficiary.firstName,
             lastName = beneficiary.lastName,
             familyMemberNumber = beneficiary.familyMembersNumber!!,
@@ -96,5 +97,28 @@ class BeneficiariesService(
 
         cellPhoneRepository.save(updatedCell)
         addressRepository.save(updatedAddress)
+    }
+
+    fun findAllBeneficiaries(): List<ReadBeneficiariesDto> {
+        return beneficiariesRepository.findAll().map { it->
+            val address = addressRepository.findByResident(it)
+            val cellInfo = cellPhoneRepository.findByPhoneOwner(it)
+            ReadBeneficiariesDto(
+                id = it.apiId!!,
+                firstName = it.firstName,
+                lastName = it.lastName,
+                familyMemberNumber = it.familyMembersNumber!!,
+                address = AddressDto(
+                    name =  address.name,
+                    complement = address.complement,
+                    number = address.number
+                ),
+                number = CellPhoneDto(
+                    countryCode = cellInfo.countryCode,
+                    ddd = cellInfo.ddd,
+                    prefixLine = cellInfo.prefixLine
+                )
+            )
+        }
     }
 }

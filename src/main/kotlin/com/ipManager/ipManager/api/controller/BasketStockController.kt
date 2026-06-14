@@ -22,8 +22,7 @@ class BasketStockController(
     @Operation(summary = "Add baskets to stock")
     @PostMapping("/{quantity}")
     @ResponseStatus(HttpStatus.CREATED)
-    fun addStock(@PathVariable quantity: Int?) {
-        val quantity = quantity ?: throw IllegalArgumentException("quantity is required")
+    fun addStock(@PathVariable quantity: Int) {
         basketStockService.addStock(quantity)
     }
 
