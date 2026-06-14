@@ -44,13 +44,13 @@ class BasketDistroService(
         }
 
         val date = ZonedDateTime.now()
-        val distributedBasket = distroRepository.findByAdminNameAndMonthAndYear(
-            adminName = adminName,
+        val distributionsToBeneficiary = distroRepository.findByBeneficiaryAndMonthAndYear(
+            beneficiary = beneficiary,
             month = date.monthValue,
             year = date.year,
         )
 
-        if (distributedBasket.size >= 2) {
+        if (distributionsToBeneficiary.size >= 2) {
             throw ConflictException(ErrorMessages.MONTHLY_LIMIT_EXCEEDED)
         }
 

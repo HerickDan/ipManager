@@ -1,6 +1,7 @@
 package com.ipManager.ipManager.api.dto
 
 data class ReadBeneficiariesDto(
+    val id: String,
     val firstName: String,
     val lastName: String,
     val familyMemberNumber: Int,

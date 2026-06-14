@@ -53,6 +53,7 @@ class BeneficiariesService(
         val cellInfo = cellPhoneRepository.findByPhoneOwner(beneficiary)
 
         return ReadBeneficiariesDto(
+            id = beneficiary.apiId!!,
             firstName = beneficiary.firstName,
             lastName = beneficiary.lastName,
             familyMemberNumber = beneficiary.familyMembersNumber!!,
@@ -103,6 +104,7 @@ class BeneficiariesService(
             val address = addressRepository.findByResident(it)
             val cellInfo = cellPhoneRepository.findByPhoneOwner(it)
             ReadBeneficiariesDto(
+                id = it.apiId!!,
                 firstName = it.firstName,
                 lastName = it.lastName,
                 familyMemberNumber = it.familyMembersNumber!!,
