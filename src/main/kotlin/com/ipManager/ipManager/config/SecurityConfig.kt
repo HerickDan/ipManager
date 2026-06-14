@@ -28,7 +28,7 @@ class SecurityConfig(
             .csrf { it.disable() }
             .cors { }
             .sessionManagement {
-                it.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                it.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
             }
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers(HttpMethod.POST, "/admin").permitAll()
