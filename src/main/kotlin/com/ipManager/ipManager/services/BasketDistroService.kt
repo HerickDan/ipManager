@@ -1,5 +1,6 @@
 package com.ipManager.ipManager.services
 
+import com.ipManager.ipManager.api.dto.ReadDistributionDto
 import com.ipManager.ipManager.api.dto.RegisterDistroDto
 import com.ipManager.ipManager.commons.errorMessages.ErrorMessages
 import com.ipManager.ipManager.config.Exceptions.BadRequestException
@@ -20,6 +21,14 @@ class BasketDistroService(
     private val distroRepository: BasketDistroRepository,
     private val beneficiariesRepository: BeneficiariesRepository,
 ) {
+    fun findAll(month: Int?, year: Int?): List<ReadDistributionDto> {
+        val currentDate = ZonedDateTime.now()
+        val monthParam = month ?: currentDate.monthValue
+        val yearParam = year ?: currentDate.year
+        return distroRepository.findByMonthAndYear(month = monthParam, year = yearParam)
+            .map { ReadDistributionDto.fromEntity(it) }
+    }
+
     fun register(dto: RegisterDistroDto) {
         val adminName = SecurityContextHolder.getContext().authentication!!.name
         val beneficiary = beneficiariesRepository.findByApiId(dto.beneficiaryId)

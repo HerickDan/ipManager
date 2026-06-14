@@ -18,4 +18,14 @@ interface BasketDistroRepository: JpaRepository<BasketDistroEntity,Long> {
         month: Int,
         year: Int
     ): List<BasketDistroEntity>
+
+    @Query("""
+    SELECT b FROM BasketDistroEntity b
+    WHERE YEAR(b.distributedIn) = :year
+    AND MONTH(b.distributedIn) = :month
+    """)
+    fun findByMonthAndYear(
+        month: Int,
+        year: Int
+    ): List<BasketDistroEntity>
 }

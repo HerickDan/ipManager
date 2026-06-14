@@ -41,6 +41,7 @@ class SecurityConfig(
                 auth.requestMatchers(HttpMethod.GET,"/beneficiaries/{id}").authenticated()
 
                 auth.requestMatchers(HttpMethod.POST,"/distributions").authenticated()
+                auth.requestMatchers(HttpMethod.GET,"/distributions").authenticated()
                 auth.requestMatchers(HttpMethod.GET, "/baskets/stock").authenticated()
                 auth.requestMatchers(HttpMethod.POST,"/baskets/stock/{quantity}").authenticated()
 
