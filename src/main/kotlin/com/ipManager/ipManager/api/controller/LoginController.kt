@@ -4,6 +4,8 @@ import com.ipManager.ipManager.api.dto.LoginRequestDto
 import com.ipManager.ipManager.api.responses.LoginResponseDto
 import com.ipManager.ipManager.services.Authentication.AuthService
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,8 +19,10 @@ class LoginController(
 ) {
     @PostMapping
     fun doLogin(
-        @RequestBody login: LoginRequestDto
+        @RequestBody login: LoginRequestDto,
+        request: HttpServletRequest,
+        response: HttpServletResponse
     ): LoginResponseDto {
-        return service.login(login)
+        return service.login(login, request, response)
     }
 }
