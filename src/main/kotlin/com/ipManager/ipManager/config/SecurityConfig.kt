@@ -35,15 +35,16 @@ class SecurityConfig(
                 auth.requestMatchers("/auth").permitAll()
 
                 auth.requestMatchers(HttpMethod.POST,"/beneficiaries").hasAuthority(Role.REVEREND.name)
-                auth.requestMatchers(HttpMethod.DELETE,"/beneficiaries/{id}").hasAuthority(Role.REVEREND.name)
-                auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/{id}").authenticated()
+                auth.requestMatchers(HttpMethod.DELETE,"/beneficiaries/**").hasAuthority(Role.REVEREND.name)
+                auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/**").authenticated()
+                auth.requestMatchers(HttpMethod.PATCH, "/beneficiaries/active/**").authenticated()
                 auth.requestMatchers(HttpMethod.GET, "/beneficiaries").authenticated()
-                auth.requestMatchers(HttpMethod.GET,"/beneficiaries/{id}").authenticated()
+                auth.requestMatchers(HttpMethod.GET,"/beneficiaries/**").authenticated()
 
                 auth.requestMatchers(HttpMethod.POST,"/distributions").authenticated()
                 auth.requestMatchers(HttpMethod.GET,"/distributions").authenticated()
                 auth.requestMatchers(HttpMethod.GET, "/baskets/stock").authenticated()
-                auth.requestMatchers(HttpMethod.POST,"/baskets/stock/{quantity}").authenticated()
+                auth.requestMatchers(HttpMethod.POST,"/baskets/stock/**").authenticated()
 
 
                 auth

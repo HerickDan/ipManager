@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-@Tag(name="Beneficiaries")
+@Tag(name = "Beneficiaries")
 @RequestMapping("/beneficiaries")
 class BeneficiariesController(
     val service: BeneficiariesService
@@ -33,8 +34,11 @@ class BeneficiariesController(
     }
 
     @Operation(summary = "Find All Beneficiaries")
-    @GetMapping
-    fun getAll(): List<ReadBeneficiariesDto> =  service.findAllBeneficiaries()
+    @GetMapping()
+    fun getAll(
+        @RequestParam(required = false)
+        active: Boolean ? = true
+    ): List<ReadBeneficiariesDto> = service.findAllBeneficiaries(active!!)
 
     @Operation(summary = "Disable beneficiary")
     @DeleteMapping("/{id}")
@@ -42,6 +46,13 @@ class BeneficiariesController(
         @PathVariable id: String
     ) {
         service.disableBeneficiary(id)
+    }
+    @Operation(summary = "Active beneficiary")
+    @PatchMapping("/active/{id}")
+    fun activeBeneficiary(
+        @PathVariable id: String
+    ) {
+        service.activeBeneficiary(id)
     }
 
     @Operation(summary = "Update beneficiary")
