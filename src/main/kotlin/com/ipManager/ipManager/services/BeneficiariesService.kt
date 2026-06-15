@@ -77,6 +77,13 @@ class BeneficiariesService(
         beneficiariesRepository.save(beneficiary)
     }
 
+    fun activeBeneficiary(id: String) {
+        val beneficiary = beneficiariesRepository.findByApiId(id)
+            ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
+        beneficiary.active = true
+        beneficiariesRepository.save(beneficiary)
+    }
+
     fun updateUserInfo(id: String, req: UpdateUserInfoDto) {
         val beneficiary = beneficiariesRepository.findByApiId(id)
             ?: throw NotFoundException(ErrorMessages.NOT_FOUND_EXCEPTION)
@@ -99,8 +106,8 @@ class BeneficiariesService(
         addressRepository.save(updatedAddress)
     }
 
-    fun findAllBeneficiaries(): List<ReadBeneficiariesDto> {
-        return beneficiariesRepository.findAll().map { it->
+    fun findAllBeneficiaries(active: Boolean): List<ReadBeneficiariesDto> {
+        return beneficiariesRepository.findAllByActive(active).map { it->
             val address = addressRepository.findByResident(it)
             val cellInfo = cellPhoneRepository.findByPhoneOwner(it)
             ReadBeneficiariesDto(
