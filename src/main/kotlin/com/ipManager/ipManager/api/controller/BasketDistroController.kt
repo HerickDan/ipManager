@@ -1,7 +1,7 @@
 package com.ipManager.ipManager.api.controller
 
-import com.ipManager.ipManager.api.dto.ReadDistributionDto
-import com.ipManager.ipManager.api.dto.RegisterDistroDto
+import com.ipManager.ipManager.api.requests.RegisterDistroRequest
+import com.ipManager.ipManager.api.responses.ReadDistributionResponse
 import com.ipManager.ipManager.services.BasketDistroService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -23,11 +23,12 @@ class BasketDistroController(
     fun findAll(
         @RequestParam(required = false) month: Int?,
         @RequestParam(required = false) year: Int?,
-    ): List<ReadDistributionDto> = basketDistroService.findAll(month = month, year = year)
+    ): List<ReadDistributionResponse> =
+        basketDistroService.findAll(month = month, year = year).map { ReadDistributionResponse.fromDto(it) }
 
     @Operation(summary = "Register distribution")
     @PostMapping
-    fun register(@RequestBody request: RegisterDistroDto) {
-        basketDistroService.register(request)
+    fun register(@RequestBody request: RegisterDistroRequest) {
+        basketDistroService.register(request.toDto())
     }
 }

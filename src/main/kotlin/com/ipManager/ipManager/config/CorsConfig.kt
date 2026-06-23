@@ -21,7 +21,6 @@ class CorsConfig(
         val configuration = CorsConfiguration()
 
         configuration.allowedOrigins = listOf(
-            "http://localhost:3000",
             client
         )
 

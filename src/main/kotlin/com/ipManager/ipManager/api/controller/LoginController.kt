@@ -1,7 +1,7 @@
 package com.ipManager.ipManager.api.controller
 
-import com.ipManager.ipManager.api.dto.LoginRequestDto
-import com.ipManager.ipManager.api.responses.LoginResponseDto
+import com.ipManager.ipManager.api.requests.LoginRequest
+import com.ipManager.ipManager.api.responses.LoginResponse
 import com.ipManager.ipManager.services.Authentication.AuthService
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
@@ -19,10 +19,11 @@ class LoginController(
 ) {
     @PostMapping
     fun doLogin(
-        @RequestBody login: LoginRequestDto,
-        request: HttpServletRequest,
-        response: HttpServletResponse
-    ): LoginResponseDto {
-        return service.login(login, request, response)
+        @RequestBody request: LoginRequest,
+        req: HttpServletRequest,
+        resp: HttpServletResponse
+    ): LoginResponse {
+        val info = service.login(request.toDto(), req, resp)
+        return LoginResponse(email = info.email, role = info.role)
     }
 }

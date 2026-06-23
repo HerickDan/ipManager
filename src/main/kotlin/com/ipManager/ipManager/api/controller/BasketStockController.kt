@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.api.controller
 
-import com.ipManager.ipManager.repositories.entities.BasketEntity
+import com.ipManager.ipManager.api.responses.BasketStockResponse
 import com.ipManager.ipManager.services.BasketStockService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
@@ -28,7 +27,7 @@ class BasketStockController(
 
     @Operation(summary = "Return basket quantity")
     @GetMapping
-    fun getStock(): BasketEntity? {
-        return basketStockService.getCurrentStock()
+    fun getStock(): BasketStockResponse? {
+        return basketStockService.getCurrentStock()?.let { BasketStockResponse.fromDto(it) }
     }
 }

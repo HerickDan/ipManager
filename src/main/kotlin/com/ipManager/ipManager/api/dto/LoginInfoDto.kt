@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.api.dto
 
-data class LoginRequestDto (
+data class LoginInfoDto(
     val email: String,
-    val password: String,
+    val role: String
 )

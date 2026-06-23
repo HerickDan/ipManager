@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.config.Exceptions
 
-import com.ipManager.ipManager.api.dto.ErrorDto
+import com.ipManager.ipManager.api.responses.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.http.ResponseEntity
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 
 class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException::class)
-    fun notFoundException(notFoundException: NotFoundException): ResponseEntity<ErrorDto>{
+    fun notFoundException(notFoundException: NotFoundException): ResponseEntity<ErrorResponse>{
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-            ErrorDto(
+            ErrorResponse(
                 statusCode = HttpStatus.NOT_FOUND,
                 errorMessage = notFoundException.message!!
             )
@@ -20,9 +20,9 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BadRequestException::class)
-    fun businessException(badRequest: BadRequestException): ResponseEntity<ErrorDto>{
+    fun businessException(badRequest: BadRequestException): ResponseEntity<ErrorResponse>{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-            ErrorDto(
+            ErrorResponse(
                 statusCode = HttpStatus.BAD_REQUEST,
                 errorMessage = badRequest.message!!
             )
@@ -30,9 +30,9 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ConflictException::class)
-    fun businessException(badRequest: ConflictException): ResponseEntity<ErrorDto>{
+    fun businessException(badRequest: ConflictException): ResponseEntity<ErrorResponse>{
         return ResponseEntity.status(HttpStatus.CONFLICT).body(
-            ErrorDto(
+            ErrorResponse(
                 statusCode = HttpStatus.CONFLICT,
                 errorMessage = badRequest.message!!
             )

@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.api.responses
 
-data class LoginResponseDto (
-    val email:String,
+data class LoginResponse(
+    val email: String,
     val role: String
 )

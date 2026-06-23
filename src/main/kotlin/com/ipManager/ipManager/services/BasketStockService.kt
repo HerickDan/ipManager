@@ -1,5 +1,6 @@
 package com.ipManager.ipManager.services
 
+import com.ipManager.ipManager.api.dto.BasketStockDto
 import com.ipManager.ipManager.repositories.entities.BasketEntity
 import com.ipManager.ipManager.repositories.interfaces.BasketStockRepository
 import org.springframework.stereotype.Service
@@ -31,7 +32,7 @@ class BasketStockService(
         }
     }
 
-    fun getCurrentStock(): BasketEntity? {
-        return basketRepository.findAll().firstOrNull()
+    fun getCurrentStock(): BasketStockDto? {
+        return basketRepository.findAll().firstOrNull()?.let { BasketStockDto.fromEntity(it) }
     }
 }
