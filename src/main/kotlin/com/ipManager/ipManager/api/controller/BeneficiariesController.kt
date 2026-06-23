@@ -1,6 +1,6 @@
 package com.ipManager.ipManager.api.controller
 
-import com.ipManager.ipManager.api.dto.ReadBeneficiariesDto
+import com.ipManager.ipManager.api.responses.ReadBeneficiariesResponse
 import com.ipManager.ipManager.api.requests.CreateBeneficiariesRequest
 import com.ipManager.ipManager.api.requests.UpdateUserInfoRequest
 import com.ipManager.ipManager.services.BeneficiariesService
@@ -38,7 +38,8 @@ class BeneficiariesController(
     fun getAll(
         @RequestParam(required = false)
         active: Boolean ? = true
-    ): List<ReadBeneficiariesDto> = service.findAllBeneficiaries(active!!)
+    ): List<ReadBeneficiariesResponse> =
+        service.findAllBeneficiaries(active!!).map { ReadBeneficiariesResponse.fromDto(it) }
 
     @Operation(summary = "Disable beneficiary")
     @DeleteMapping("/{id}")
@@ -69,7 +70,7 @@ class BeneficiariesController(
     @GetMapping("/{id}")
     fun findBeneficiaryById(
         @PathVariable id: String
-    ): ReadBeneficiariesDto {
-        return service.findBeneficiaryById(id)
+    ): ReadBeneficiariesResponse {
+        return ReadBeneficiariesResponse.fromDto(service.findBeneficiaryById(id))
     }
 }
